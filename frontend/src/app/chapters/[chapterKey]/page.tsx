@@ -9,6 +9,8 @@ import { formatDate } from 'utils/dateFormatter'
 import DetailsCard from 'components/CardDetailsPage'
 import LoadingSpinner from 'components/LoadingSpinner'
 import { handleAppError, ErrorDisplay } from 'app/global-error'
+import SponsorBanner from 'components/SponsorBanner'
+import SecondaryCard from 'components/SecondaryCard'
 
 export default function ChapterDetailsPage() {
   const { chapterKey } = useParams()
@@ -57,15 +59,26 @@ export default function ChapterDetailsPage() {
     },
   ]
   return (
-    <DetailsCard
-      details={details}
-      geolocationData={chapter}
-      is_active={chapter.isActive}
-      socialLinks={chapter.relatedUrls}
-      summary={chapter.summary}
-      title={chapter.name}
-      topContributors={chapter.topContributors}
-      type="chapter"
-    />
+    <>
+      <DetailsCard
+        details={details}
+        geolocationData={chapter}
+        is_active={chapter.isActive}
+        socialLinks={chapter.relatedUrls}
+        summary={chapter.summary}
+        title={chapter.name}
+        topContributors={chapter.topContributors}
+        type="chapter"
+      />
+      <div className="mt-8 max-w-6xl mx-auto">
+        <SecondaryCard>
+          <SponsorBanner
+            entityType="chapter"
+            entityKey={chapterKey as string}
+            entityName={chapter.name}
+          />
+        </SecondaryCard>
+      </div>
+    </>
   )
 }
