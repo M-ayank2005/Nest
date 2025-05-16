@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { GET_PROJECT_DATA } from 'server/queries/projectQueries'
+import { TopContributorsTypeGraphql } from 'types/contributor'
 import { ProjectTypeGraphql } from 'types/project'
 import { capitalize } from 'utils/capitalize'
 import { formatDate } from 'utils/dateFormatter'
@@ -24,6 +25,7 @@ const ProjectDetailsPage = () => {
   const { projectKey } = useParams()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [project, setProject] = useState<ProjectTypeGraphql | null>(null)
+  const [topContributors, setTopContributors] = useState<TopContributorsTypeGraphql[]>([])
   const [recentPullRequests, setRecentPullRequests] = useState(null)
 
   const { data, error: graphQLRequestError } = useQuery(GET_PROJECT_DATA, {
@@ -33,6 +35,7 @@ const ProjectDetailsPage = () => {
   useEffect(() => {
     if (data) {
       setProject(data?.project)
+      setTopContributors(data?.topContributors)
       setRecentPullRequests(data.recentPullRequests)
       setIsLoading(false)
     }
