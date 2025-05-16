@@ -27,9 +27,11 @@ const SponsorBanner = ({
 
   return (
     <div className="mb-4 text-center">
-      <h3 className="mb-4 text-2xl font-semibold">Support This {entityType?.charAt(0).toUpperCase() + entityType?.slice(1)}</h3>
+      <h3 className="mb-4 text-2xl font-semibold">
+        Support This {entityType ? (entityType.charAt(0).toUpperCase() + entityType.slice(1)) : 'Project'}
+      </h3>
       <p className="mb-6 text-gray-600 dark:text-gray-400">
-        Your donations help maintain and improve this {entityType}.
+        Your donations help maintain and improve this {entityType || 'project'}.
       </p>
       <Link
         href={generateDonateUrl()}
