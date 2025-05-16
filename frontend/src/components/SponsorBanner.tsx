@@ -20,9 +20,9 @@ const SponsorBanner = ({
       repository: 'www-repository-',
     }
 
-    const repoName = `${prefixMap[entityType]}${entityKey}`
-    const formattedTitle = entityName.replace(/\s+/g, '+')
-    return `https://owasp.org/donate/?reponame=${repoName}&title=OWASP+${formattedTitle}`
+    const repoName = encodeURIComponent(`${prefixMap[entityType]}${entityKey}`)
+    const formattedTitle = encodeURIComponent(`OWASP ${entityName}`)
+    return `https://owasp.org/donate/?reponame=${repoName}&title=${formattedTitle}`
   }
 
   return (
